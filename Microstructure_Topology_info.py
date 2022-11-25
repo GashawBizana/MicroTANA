@@ -20,26 +20,6 @@ def xyz_to_pcd(xyz):
     
     return(pcd)
 
-# def UnWrapCluster(pcd,EdgeLength):
-#     # NumberOfPoints=len(pcd.points)
-#     labels = np.array(pcd.cluster_dbscan(eps=5, min_points=1))
-#     max_label = labels.max()
-#     id_big=np.where(labels == 0)[0]
-#     pcd_big = pcd.select_by_index(id_big)
-#     pcd_all=pcd_big
-        
-    
-#     for i in range(1,max_label+1):
-        
-#         id_i=np.where(labels == i)[0]
-#         pcd_i = pcd.select_by_index(id_i)
-#         diff_center=np.rint((pcd_big.get_center()-pcd_i.get_center())/EdgeLength)
-#         pcd_i_to_big=pcd_i.translate(diff_center*EdgeLength,relative=True)
-#         pcd_all += pcd_i_to_big
-    
-#     pcd_as_array=np.asarray(pcd_all.points)
-#     return(pcd_as_array)
-
 def UnWrapCluster(pcd,EdgeLength):
     # NumberOfPoints=len(pcd.points)
     puc=copy.deepcopy(pcd)
@@ -96,17 +76,6 @@ def Grain_mesh_ovito(GrainId,X,EdgeLength,grainId):
     tri_mesh=trimesh.Trimesh(vertices=mesh.get_vertices(),faces=mesh.get_faces())
     return(tri_mesh)
 
-# class Microstructure:
-      
-    
-# class Grain:
-    
-#     def __init__(self, grain_id=0):
-#         grain_id=self.grain_id
-    
-#     def grain_boundary(grain_id,InnerAtom=innerAtom):
-        
-#         grain_boundary_associated_with_grain=[j[0] for j in  InnerAtom if  (Grain_id[0] in j[0]) ]
 def misorientation_quaternions(timestep,grain_boundary_forming_step_i, q0,q1,q2,q3,grain_mapping_data):
     
     n0_before_mapping=grain_boundary_forming_step_i[0] # before mapping
@@ -133,10 +102,6 @@ def misorientation_quaternions(timestep,grain_boundary_forming_step_i, q0,q1,q2,
     
     q1=np.array([q0_n0,q1_n0,q2_n0,q3_n0])
     q2=np.array([q0_n1,q1_n1,q2_n1,q3_n1])
-    
-    #misorientation_grain_boundary_forming_step_i= np.degrees( np.abs(    2* (np.arccos (q0_n0*q0_n1 + q1_n0*q1_n1 + q2_n0*q2_n1 + q3_n0*q3_n1 ))   )  )
-    
-    
     
     return(q1,q2)
     
