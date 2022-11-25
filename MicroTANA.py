@@ -161,12 +161,8 @@ def MicroTANA_one_file(file_and_timestep,ThresholdDistance=3.25,isPeriodic=True)
     
     # NormalVector=NormalvectorEstimationWhole(PeriodicNeighbourList_Index,X,EdgeLength)
     print (file + " Curvature analysis  ...")
-    # grain_property_current=GrainProperty(InnerAtom,GrainId,X,EdgeLength)                
-    # grain_boundary_property_current=GrainBoundaryProperty(GrainBoundary,EdgeLength)
-    # grain_boundary_property_extended_current,grain_property_current=GrainBoundaryProperties(GrainBoundary,InnerAtom,EdgeLength,X,GrainId)
-    
+   
     grain_boundary_property_extended_current,grain_property_current=GrainBoundaryProperties_ovito(GrainBoundary,InnerAtom,EdgeLength,Xnew,GrainId,ModifiedGrainIdListSorted,TripleLine,QuadraplePoint,atomicradii=1.43,method=1)
-    # grain_boundary_property_current=GrainBoundaryPropertyExtended(GrainBoundary,grain_boundary_property_extended_current)
     grain_boundary_property_current=GrainBoundaryPropertyExtended_ovito(GrainBoundary,grain_boundary_property_extended_current)
     triple_line_length_current=TripleLineLength_For_all(TripleLine,EdgeLength)
     Grain_number_of_grain_boundaries_current, Grain_number_of_triple_lines_current,Grain_average_misorientation_current,Grain_length_of_triple_lines_current,grain_total_curvature_surface_area_volume_current, GrainBoundary_number_of_triple_line_current,GrainBoundary_misorientation_current,GrainBoundary_length_of_triple_line_current,GrainBoundary_total_curvature_mean_curvature_surface_area_current,grain_total_curvature_surface_area_volume_from_face_current=Microstructure_topology(InnerAtom,GrainBoundary,TripleLine,grain_property_current,grain_boundary_property_current, grain_boundary_property_extended_current,triple_line_length_current,timestep,q0,q1,q2,q3,grain_mapping_data,Xnew,GrainId,EdgeLength)
@@ -183,7 +179,7 @@ def MicroTANA_one_file(file_and_timestep,ThresholdDistance=3.25,isPeriodic=True)
 
 6-Grain_length_of_triple_lines, 7- grain_total_curvature_surface_area_volume, 8 - GrainBoundary_number_of_triple, 9- GrainBoundary_misorientation, 10 -GrainBoundary_length_of_triple_line,
 
-11- GrainBoundary_total_curvature_surface_area_volume_current, 11- EdgeLength
+11- GrainBoundary_total_curvature_surface_area_volume_current, 11- EdgeLength of simulation box
 
 '''
 
@@ -193,56 +189,18 @@ def MicroTANA_one_file(file_and_timestep,ThresholdDistance=3.25,isPeriodic=True)
 
 filename=[]
 for i in range (1,65):
-    # a="D:/microcube_res/GradeA/dump.micro_cube__AtomData_" + str(i)+ "_*.cfg"
-    # a="D:/microcube/GradeA1/dump.micro_cube__AtomData_" + str(i)+ "_*.cfg"
-    # a="D:/GradeA_A500C50Al250/dump.A500C50Al250__AtomData_" + str(i)+ "_*.cfg"
-    # a="D:/md_data_Gashaw/AnnealAl161New/Quenched/GradeA_Al161_500/dump.annealAl161__AtomData_" + str(i)+ "_*.cfg"
+   
     a="F:/GradeA_Al161_500/dump.annealAl161__AtomData_" + str(i)+ "_*.cfg"
     
-    
-    # a="E:/Anneal500+Compression50Al161/GradeAcalcA500C50Al161/dump.anneal500Al161_P50__AtomData_" + str(i) + "_*.cfg"
     filename.append(glob.glob(a)[0])
-
-# file_path="D:/microcube_res/GradeA/micro_cube_grain_id_mapping.mat"
-# file_path="D:/microcube/GradeA1/micro_cube_grain_id_mapping.mat"
-# file_path="D:/md_data_Gashaw/AnnealAl161New/Quenched/GradeA_Al161_500/A500Al161_grain_id_mapping.mat"
 file_path="F:/GradeA_Al161_500/A500Al161_grain_id_mapping.mat"
-# file_path = "D:/GradeA_A500C50Al250/A500C50Al250_grain_id_mapping.mat"
-# file_path= "E:/Anneal500+Compression50Al161/GradeAcalcA500C50Al161/Trackedid_Al161.mat"
 mat = scipy.io.loadmat(file_path)
 grain_mapping_data = mat['TrackedId']
-# file_path_phi='D:/GradeA_A500C50Al250/TimeEvo/dump.A500C50Al250__GrainData__TimeEvo_PHI.csv'
-
-# file_path_q0='D:/microcube_res/GradeA/TimeEvo/dump.micro_cube__GrainData__TimeEvo_q0.csv'
-# file_path_q1='D:/microcube_res/GradeA/TimeEvo/dump.micro_cube__GrainData__TimeEvo_q1.csv'
-# file_path_q2='D:/microcube_res/GradeA/TimeEvo/dump.micro_cube__GrainData__TimeEvo_q2.csv'
-# file_path_q3='D:/microcube_res/GradeA/TimeEvo/dump.micro_cube__GrainData__TimeEvo_q3.csv'
-
-# file_path_q0='D:/microcube/GradeA1/TimeEvo/dump.micro_cube__GrainData__TimeEvo_q0.csv'
-# file_path_q1='D:/microcube/GradeA1/TimeEvo/dump.micro_cube__GrainData__TimeEvo_q1.csv'
-# file_path_q2='D:/microcube/GradeA1/TimeEvo/dump.micro_cube__GrainData__TimeEvo_q2.csv'
-# file_path_q3='D:/microcube/GradeA1/TimeEvo/dump.micro_cube__GrainData__TimeEvo_q3.csv'
-
-# file_path_q0='D:/md_data_Gashaw/AnnealAl161New/Quenched/GradeA_Al161_500/TimeEvo/dump.annealAl161__GrainData__TimeEvo_q0.csv'
-# file_path_q1='D:/md_data_Gashaw/AnnealAl161New/Quenched/GradeA_Al161_500/TimeEvo/dump.annealAl161__GrainData__TimeEvo_q1.csv'
-# file_path_q2='D:/md_data_Gashaw/AnnealAl161New/Quenched/GradeA_Al161_500/TimeEvo/dump.annealAl161__GrainData__TimeEvo_q2.csv'
-# file_path_q3='D:/md_data_Gashaw/AnnealAl161New/Quenched/GradeA_Al161_500/TimeEvo/dump.annealAl161__GrainData__TimeEvo_q3.csv'
-
 
 file_path_q0='F:/GradeA_Al161_500/TimeEvo/dump.annealAl161__GrainData__TimeEvo_q0.csv'
 file_path_q1='F:/GradeA_Al161_500/TimeEvo/dump.annealAl161__GrainData__TimeEvo_q1.csv'
 file_path_q2='F:/GradeA_Al161_500/TimeEvo/dump.annealAl161__GrainData__TimeEvo_q2.csv'
 file_path_q3='F:/GradeA_Al161_500/TimeEvo/dump.annealAl161__GrainData__TimeEvo_q3.csv'
-
-# file_path_q0='E:/Anneal500+Compression50Al161/GradeAcalcA500C50Al161/TimeEvo/dump.anneal500Al161_P50__GrainData__TimeEvo_q0.csv'
-# file_path_q1='E:/Anneal500+Compression50Al161/GradeAcalcA500C50Al161/TimeEvo/dump.anneal500Al161_P50__GrainData__TimeEvo_q1.csv'
-# file_path_q2='E:/Anneal500+Compression50Al161/GradeAcalcA500C50Al161/TimeEvo/dump.anneal500Al161_P50__GrainData__TimeEvo_q2.csv'
-# file_path_q3='E:/Anneal500+Compression50Al161/GradeAcalcA500C50Al161/TimeEvo/dump.anneal500Al161_P50__GrainData__TimeEvo_q3.csv'
-
-# file_path_q0='D:/GradeA_A500C50Al250/TimeEvo/dump.A500C50Al250__GrainData__TimeEvo_q0.csv'
-# file_path_q1='D:/GradeA_A500C50Al250/TimeEvo/dump.A500C50Al250__GrainData__TimeEvo_q1.csv'
-# file_path_q2='D:/GradeA_A500C50Al250/TimeEvo/dump.A500C50Al250__GrainData__TimeEvo_q2.csv'
-# file_path_q3='D:/GradeA_A500C50Al250/TimeEvo/dump.A500C50Al250__GrainData__TimeEvo_q3.csv'
 
 q0=pd.read_csv(file_path_q0,sep=';')
 q0=(pd.DataFrame(q0).to_numpy())[:,1:]
@@ -254,17 +212,6 @@ q2=(pd.DataFrame(q2).to_numpy())[:,1:]
 q3=pd.read_csv(file_path_q3,sep=';')
 q3=(pd.DataFrame(q3).to_numpy())[:,1:]
 
-
-
-# grain_boundary_property_for_all_timesteps1=[0]*len(filename)
-# for i in range(0,2):
-    
-#     file=filename[i]
-#     grain_boundary_property_i=MicroTANA_one_file(file)
-#     grain_boundary_property_for_all_timesteps1[i]= grain_boundary_property_i
-
-
-    
 ######## Multi processing #########
 
 if __name__ == '__main__':
@@ -316,61 +263,3 @@ if __name__ == '__main__':
         del grain_boundary_property_for_chunk_timesteps, grain_property_for_chunk_timesteps,triple_line_length_for_chunk_timesteps,Grain_number_of_grain_boundaries_for_chunk_timesteps, Grain_number_of_triple_lines_for_chunk_timesteps,Grain_average_misorientation_for_chunk_timesteps,Grain_length_of_triple_lines_for_chunk_timesteps,grain_total_curvature_surface_area_volume_for_chunk_timesteps, GrainBoundary_number_of_triple_line_for_chunk_timesteps,GrainBoundary_misorientation_for_chunk_timesteps,GrainBoundary_length_of_triple_line_for_chunk_timesteps,GrainBoundary_total_curvature_mean_curvature_surface_area_for_chunk_timesteps,grain_total_curvature_surface_area_volume_from_face_for_chunk_timesteps,grain_boundary_property_extended_for_chunk_timesteps, EdgeLength_for_chunk_timesteps,InnerAtom_for_chunk_timesteps,GrainBoundary_for_chunk_timesteps,TripleLine_for_chunk_timesteps,QuadraplePoint_for_chunk_timesteps
         
         gc.collect()
-
-
-
-        
-        
-        
-        
-        
-        
-    
-    
-    
-    # grain_boundary_property_for_all_timesteps,EdgeLength_for_all_timesteps,Grain_for_all_timesteps=[],[],[] 
-    # for i in range(0,len(grain_boundary_property_for_all_timesteps_and_EdgeLength_for_all_timesteps)):
-    #     grain_boundary_property_for_all_timesteps.append(grain_boundary_property_for_all_timesteps_and_EdgeLength_for_all_timesteps[i][0][0])
-    #     Grain_for_all_timesteps.append(grain_boundary_property_for_all_timesteps_and_EdgeLength_for_all_timesteps[i][0][1])
-    #     EdgeLength_for_all_timesteps.append(grain_boundary_property_for_all_timesteps_and_EdgeLength_for_all_timesteps[i][1])
-#     def disFor1(i,grain_boundary_property_for_all_timesteps_t=grain_boundary_property_for_all_timesteps,EdgeLength_for_all_timesteps_t=EdgeLength_for_all_timesteps,grain_mapping_data_t=grain_mapping_data ):
-#         result_i=Compute_distance_and_average_curavture(i, grain_boundary_property_for_all_timesteps,EdgeLength_for_all_timesteps,grain_mapping_data)
-        
-#         return(result_i)
-    # b_pool=Pool()
-    
-    # distance_and_average_curvature_for_all_timesteps= b_pool.map(disFor1,b)
-    
-    # b_pool.close()
-    # b_pool.join()
-
-# def Distance(i,j):
-#     p0=grain_boundary_property_for_all_timesteps[0][0][3:][0]
-#     p1=grain_boundary_property_for_all_timesteps[0][20][3:][0]
-#     cloudh0= pv.PolyData(p0)
-#     cloudh1=pv.PolyData(p1)
-    
-#     h1 = cloudh0.delaunay_2d()
-#     h0= cloudh1.delaunay_2d()
-#     h1.plot_curvature()
-#     h0n = h0.compute_normals(point_normals=True, cell_normals=False, auto_orient_normals=True)
-    
-#     h0n["distances"] = np.empty(h0.n_points)
-#     for i in range(h0n.n_points):
-#         p = h0n.points[i]
-#         vec = h0n["Normals"][i] * h0n.length
-#         p0 = p - vec
-#         p1 = p + vec
-#         ip, ic = h1.ray_trace(p0, p1, first_point=True)
-#         dist = np.sqrt(np.sum((ip - p) ** 2))
-#         h0n["distances"][i] = dist
-    
-#     # Replace zeros with nans
-#     mask = h0n["distances"] == 0
-#     h0n["distances"][mask] = np.nan
-#     np.nanmean(h0n["distances"])
-    
-    # p = pv.Plotter()
-    # p.add_mesh(c, smooth_shading=True)
-    # p.add_mesh(tri_mesh, smooth_shading=True,show_edges=True,color=True)
-    # p.show()
