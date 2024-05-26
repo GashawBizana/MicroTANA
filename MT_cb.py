@@ -6,12 +6,12 @@ import pandas as pd
 import glob
 from Compute_delta_properties import Compute_change_in_time_Grain, Compute_change_in_time_GrainBoundary
 
-from MicroTANA_class import Microstructure
+from source import MicroTANA_class.Microstructure as Microstructure
 
 
 ###################### Input Files  ####################################
 
-dir_path="E:/Anneal500+Compression50Al161/GradeAcalcA500C50Al161"#"/home/uda69/lcz56/SimulationDataFromOccigen/Al/Al_161x161x161/LAMMPS/annealing500Al161x161x161/Quenched_After_AnnealAl161_500P500/GradeA_Al161_500P500"#"/home/uda69/lcz56/GradeA_Al250_500"
+dir_path="./Data"
 core_name ="dump.anneal500Al161_P50"# "dump.annealAl161P500"
 nf=97
 n_analyze=2
