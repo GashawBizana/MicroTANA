@@ -4,7 +4,7 @@ import numpy as np
 import glob
 
 # Define the directory path and core name
-dir_path = "E:/Anneal500+Compression50Al161/GradeAcalcA500C50Al161"
+dir_path = "./Data"
 core_name = "dump.anneal500Al161_P50"
 nf = 98
 
