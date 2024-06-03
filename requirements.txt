@@ -1,1 +1,8 @@
-
+Numpy
+Scipy
+Pandas
+Ovito
+trimesh
+pyvisat
+pymeshfix
+embree
